@@ -1,0 +1,17 @@
+
+SELECT average_salary / developers_count as average_salary
+FROM (
+SELECT project_name as project, count(developers.name) as developers_count, sum(developers.salary) as average_salary
+FROM(
+SELECT name as project_name, projects.id as project_id
+FROM projects
+ORDER BY projects.cost ASC
+LIMIT 1
+) as min_cost_project
+INNER JOIN developers_projects
+ON min_cost_project.project_id = developers_projects.project_id
+INNER JOIN developers
+ON developers.id = developers_projects.developer_id
+GROUP BY project
+) as result_table
+

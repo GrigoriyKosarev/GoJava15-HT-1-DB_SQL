@@ -1,0 +1,10 @@
+SELECT developers.name as dev_name, 
+	   developers.salary as salary,
+	   projects.name as project
+FROM developers
+INNER JOIN developers_projects
+ON developers.id = developers_projects.developer_id
+INNER JOIN projects
+ON developers_projects.project_id = projects.id
+ORDER BY salary DESC
+LIMIT 1
