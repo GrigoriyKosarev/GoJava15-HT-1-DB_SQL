@@ -1,4 +1,10 @@
+select avg(dev.salary::numeric)
+FROM developers dev
+INNER JOIN developers_projects dp ON dev.id = dp.developer_id
+INNER JOIN projects pr ON pr.id = dp.project_id
+WHERE pr.cost = (SELECT min(cost) FROM projects)
 
+/*
 SELECT average_salary / developers_count as average_salary
 FROM (
 SELECT project_name as project, count(developers.name) as developers_count, sum(developers.salary) as average_salary
@@ -14,4 +20,4 @@ INNER JOIN developers
 ON developers.id = developers_projects.developer_id
 GROUP BY project
 ) as result_table
-
+*/
