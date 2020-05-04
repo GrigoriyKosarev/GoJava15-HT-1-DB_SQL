@@ -1,4 +1,4 @@
-create table companies 
+create table if not exists companies 
 (
 	id int,
 	name varchar(150),
@@ -6,7 +6,7 @@ create table companies
 	primary key (id)
 );
 
-create table customers
+create table if not exists customers
 (
 	id int,
 	name varchar(150),
@@ -14,16 +14,16 @@ create table customers
 	primary key (id)
 );
 
-create table developers 
+create table if not exists developers 
 (
 	id int,
 	name varchar(150),
 	age int,
-	sex varchar(10),
+	sex ENUM('men', 'women'),
 	primary key (id)
 );
 
-create table skills
+create table if not exists skills
 (
 	id int,
 	name varchar(150),
@@ -31,7 +31,7 @@ create table skills
 	primary key (id)
 );
 
-create table skill_levels
+create table if not exists skill_levels
 (
 	id int,
 	name varchar(150),
@@ -39,7 +39,7 @@ create table skill_levels
 	primary key (id)
 );
 
-create table skills_developers 
+create table if not exists skills_developers 
 (
 	id int,
 	developer_id int,
@@ -51,7 +51,7 @@ create table skills_developers
 	foreign key (skill_level_id) references skill_levels (id)
 );
 
-create table projects 
+create table if not exists projects 
 (
 	id int,
  	name varchar(150),
@@ -59,7 +59,7 @@ create table projects
 	primary key (id)
 );
 
-create table developers_projects 
+create table if not exists developers_projects 
 (
 	id int,
  	developer_id int,
@@ -69,7 +69,7 @@ create table developers_projects
 	foreign key (project_id) references projects (id)
 );
 
-create table companies_projects 
+create table if not exists companies_projects 
 (
 	id int,
  	company_id int,
@@ -79,7 +79,7 @@ create table companies_projects
 	foreign key (project_id) references projects (id)
 );
 
-create table customers_projects 
+create table if not exists customers_projects 
 (
 	id int,
  	customer_id int,
@@ -88,5 +88,3 @@ create table customers_projects
 	foreign key (customer_id) references customers (id),
 	foreign key (project_id) references projects (id)
 );
-
-
